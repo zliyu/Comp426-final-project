@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from "react";
+import { Route, NavLink, HashRouter } from "react-router-dom";
 
 const courses = [
   {
@@ -16,26 +17,22 @@ const courses = [
   }
 ]
 
-function App() {
+function SpeechSearch() {
   return (
-    <div>
-      <div class='container pt-3' style={{height: '60px' }}>
-        <h1 class='text-center font-weight-bold display-4'>UNC Course Search</h1>
-      </div>
-      <hr />
+    <HashRouter>
       <div>
-        <NavBar />
-      </div>
-      <div class='row container-fluid'>
-        <div class='container col-lg-1'>
-          <Filter />
+        <i className="fa fa-microphone"></i>
+        <div class='row container-fluid'>
+          <div class='container col-lg-1'>
+            <Filter />
+          </div>
+          <div class='container col-lg-7'>
+            <Header />
+            <CourseList />
+          </div>
         </div>
-        <div class='container col-lg-7'>
-          <Header />
-          <CourseList />
-        </div>
       </div>
-    </div>
+    </HashRouter>
   );
 }
 
@@ -67,25 +64,6 @@ function Filter() {
   )
 }
 
-function NavBar() {
-  return (
-    <nav class="navbar navbar-fixed-right navbar-expand-sm bg-dark navbar-dark justify-content-center mb-5 mt-4">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Home</a>
-          <div class='navbar-divider'></div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Search by Text</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Search by Speech</a>
-        </li>
-      </ul>
-    </nav>
-  )
-}
-
 function Header() {
   return (
     <div class='container mb-3'>
@@ -114,4 +92,4 @@ function CourseList() {
   });
 }
 
-export default App;
+export default SpeechSearch;
