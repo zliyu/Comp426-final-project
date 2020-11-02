@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
+
+import SearchBox from "./SearchBox";
 
 const courses = [
   {
@@ -18,6 +20,13 @@ const courses = [
 ]
 
 function TextSearch() {
+  const [filter, setFilter] = useState('');
+  const [courseData, setCourseData] = useState(null);
+
+  // useEffect(() => {
+  //   (async () => {
+  //   })
+  // })
   return (
     <div>
       <div>

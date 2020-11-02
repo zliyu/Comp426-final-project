@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Route, NavLink, HashRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const courses = [
   {
@@ -18,21 +17,22 @@ const courses = [
 ]
 
 function SpeechSearch() {
+
   return (
-    <HashRouter>
-      <div>
-        <i className="fa fa-microphone"></i>
-        <div class='row container-fluid'>
-          <div class='container col-lg-1'>
-            <Filter />
-          </div>
-          <div class='container col-lg-7'>
-            <Header />
-            <CourseList />
-          </div>
+    <div>
+      {/* <button>
+        <i className="fa fa-microphone" />
+      </button>
+      <div class='row container-fluid'>
+        <div class='container col-lg-1'>
+          <Filter />
         </div>
-      </div>
-    </HashRouter>
+        <div class='container col-lg-7'>
+          <Header />
+          <CourseList />
+        </div>
+      </div> */}
+    </div>
   );
 }
 
