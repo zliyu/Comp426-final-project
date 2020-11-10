@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { Route, NavLink, HashRouter } from "react-router-dom";
+
+import SearchBox from "./SearchBox";
 
 const courses = [
   {
@@ -16,15 +19,17 @@ const courses = [
   }
 ]
 
-function App() {
+function TextSearch() {
+  const [filter, setFilter] = useState('');
+  const [courseData, setCourseData] = useState(null);
+
+  // useEffect(() => {
+  //   (async () => {
+  //   })
+  // })
   return (
     <div>
-      <div class='container pt-3' style={{height: '60px' }}>
-        <h1 class='text-center font-weight-bold display-4'>UNC Course Search</h1>
-      </div>
-      <hr />
       <div>
-        <NavBar />
       </div>
       <div class='row container-fluid'>
         <div class='container col-lg-1'>
@@ -67,25 +72,6 @@ function Filter() {
   )
 }
 
-function NavBar() {
-  return (
-    <nav class="navbar navbar-fixed-right navbar-expand-sm bg-dark navbar-dark justify-content-center mb-5 mt-4">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Home</a>
-          <div class='navbar-divider'></div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Search by Text</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Search by Speech</a>
-        </li>
-      </ul>
-    </nav>
-  )
-}
-
 function Header() {
   return (
     <div class='container mb-3'>
@@ -114,4 +100,4 @@ function CourseList() {
   });
 }
 
-export default App;
+export default TextSearch;
