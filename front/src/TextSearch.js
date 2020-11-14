@@ -95,12 +95,14 @@ class TextSearch extends React.Component {
           <span>Course Introduction: {course.introduction}</span>
           <br />
           {course.requisites !== '' &&
-            <span ><span class='font-weight-bold'>Requisites: </span><span>{course.requisites}</span><br/></span>
+            <span ><span class='font-weight-bold'>Requisites: </span><span>{course.requisites}</span><br /></span>
           }
           {course.ge !== '' &&
-            <span><span class='font-weight-bold'>GE: </span><span>{course.ge}</span><br/></span>
+            <span><span class='font-weight-bold'>GE: </span><span>{course.ge}</span><br /></span>
           }
-          <span><span class='font-weight-bold'>Grading Status: </span><span>{course.grading}</span></span>
+          {course.grading !== '' &&
+            <span><span class='font-weight-bold'>Grading Status: </span><span>{course.grading}</span></span>
+          }
           <hr />
         </div>
       ));

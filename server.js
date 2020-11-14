@@ -6,10 +6,13 @@ const request = require('request');
 const cheerio = require("cheerio");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+
+const courseTags = ['clas', 'comp'];
+
 app.get('/courses', (req, res) =>
 
-    request("https://catalog.unc.edu/courses/comp/", function (error, response, body) {
+    request(`https://catalog.unc.edu/courses/comp/`, function (error, response, body) {
         if (error) {
             res.send(response.statusCode);
         }
@@ -40,6 +43,8 @@ app.get('/courses', (req, res) =>
 
         res.json(courses);
     })
+
 )
+
 app.use(morgan('tiny'));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
