@@ -3,25 +3,10 @@ import { Route, NavLink, HashRouter } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import axios from 'axios';
 
-const courses = [
-  {
-    name: 'COMP426',
-    intro: 'Modern Web Programming',
-    pre: 'COMP410',
-    ge: 'No GE',
-    url: '#'
-  },
-  {
-    name: 'COMP562',
-    intro: 'Intro to Machine Learning',
-    ge: 'No GE',
-    url: '#'
-  }
-]
-
 class TextSearch extends React.Component {
   state = {
-    courses: []
+    courses: [],
+    courseNames: []
   };
 
   componentDidMount = () => {
@@ -33,6 +18,11 @@ class TextSearch extends React.Component {
       .then((res) => {
         const data = res.data;
         this.setState({ courses: data });
+        let names = [];
+        data.forEach(course => {
+          names.push(course.name);
+        });
+        this.setState({ courseNames: names });
         console.log('Data has been received');
       })
       .catch(() => {
@@ -116,9 +106,9 @@ class TextSearch extends React.Component {
         <div>
         </div>
         <div class='row container-fluid'>
-          <div class='container col-lg-1'>
+          {/* <div class='container col-lg-1'>
             <this.Filter />
-          </div>
+          </div> */}
           <div class='container col-lg-7'>
             {this.Header}
             {this.displayCourses(this.state.courses)}

@@ -3,6 +3,7 @@ import { Route, NavLink, HashRouter } from "react-router-dom";
 import Home from "./Home"
 import TextSearch from "./TextSearch";
 import SpeechSearch from "./SpeechSearch";
+import CourseCloud from "./CourseCloud";
 
 class Main extends Component {
     render() {
@@ -16,12 +17,14 @@ class Main extends Component {
                     <ul className="header">
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/textSearch">Search by Text</NavLink></li>
-                        <li><NavLink to='/speechSearch'>Search by Speech</NavLink></li>
+                        {/* <li><NavLink to='/speechSearch'>Search by Speech</NavLink></li> */}
+                        <li><NavLink to='/courseCloud'>Course Cloud</NavLink></li>
                     </ul>
                     <div className="content">
                         <Route exact path="/" component={Home} />
                         <Route path="/textSearch" component={TextSearch} />
-                        <Route path="/speechSearch" component={SpeechSearch}></Route>
+                        {/* <Route path="/speechSearch" component={SpeechSearch}></Route> */}
+                        <Route path="/courseCloud" component={CourseCloud}/>
                     </div>
                 </div>
             </HashRouter>
