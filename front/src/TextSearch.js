@@ -35,8 +35,6 @@ class TextSearch extends React.Component {
     this.setState({ [name]: value });
   }
 
-
-
   Filter = () => {
     return (
       <div>
@@ -99,13 +97,20 @@ class TextSearch extends React.Component {
     }
   }
 
+
   render = () => {
     console.log('State', this.state);
     return (
       <div>
-        <div>
+        <div class="container d-flex justify-content-center mt-3 mb-4">
+          <input type="text" class="col-lg-5"
+          // placeholder="Search"
+          // value={searchTerm}
+          // onChange={handleChange}
+          />
         </div>
         <div class='row container-fluid'>
+
           {/* <div class='container col-lg-1'>
             <this.Filter />
           </div> */}
