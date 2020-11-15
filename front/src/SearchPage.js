@@ -24,7 +24,7 @@ function SearchPage() {
     );
     setSearchResults(results);
   }, [searchTerm]);
-  
+
   return (
     <div className="App">
       <input

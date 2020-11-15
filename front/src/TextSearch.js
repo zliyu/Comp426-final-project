@@ -3,28 +3,29 @@ import { Route, NavLink, HashRouter } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import axios from 'axios';
 
-class TextSearch extends React.Component {
-  state = {
-    courses: [],
-    courseNames: [],
-    searchTerm: '',
-    searchResults: []
-  };
+// class TextSearch extends React.Component {
+const TextSearch = () => {
 
-  componentDidMount = () => {
-    this.getBlogPost();
-  }
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [courses, setCourses] = React.useState([]);
+  const [courseNames, setCourseNames] = React.useState([]);
 
-  getBlogPost = () => {
+  useEffect(() => {
+    getBlogPost();
+
+  }, [])
+
+  const getBlogPost = () => {
     axios.get('/courses')
       .then((res) => {
         const data = res.data;
-        this.setState({ courses: data });
+        setCourses(data)
         let names = [];
-        data.forEach(course => {
-          names.push(course.name);
-        });
-        this.setState({ courseNames: names });
+        // data.forEach(course => {
+        //   names.push(course.name);
+        // });
+        // setCourseNames(names);
         console.log('Data has been received');
       })
       .catch(() => {
@@ -32,12 +33,7 @@ class TextSearch extends React.Component {
       })
   }
 
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  Filter = () => {
+  const Filter = () => {
     return (
       <div>
         <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
@@ -65,7 +61,7 @@ class TextSearch extends React.Component {
     )
   }
 
-  Header = () => {
+  const Header = () => {
     return (
       <div class='container mb-3'>
         <div class='page-header'>
@@ -75,19 +71,19 @@ class TextSearch extends React.Component {
     )
   }
 
-  // handleSearchChange = (event) => {
-  //   this.setState({ searchTerm: event.target.value });
-  // }
+  const handleChange = e => {
+    setSearchTerm(e.target.value);
+  };
 
-  // notSure = () => {
-  //   const results = this.state.courses.filter(course =>
-  //     course.toLowerCase().includes(this.state.searchTerm)
-  //   );
-  //   this.state.setState({ searchResults: results });
-  // }
+  React.useEffect(() => {
+    const results = courses.filter(course =>
+      course.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
-  makeCard = (course) => {
-    let name = course.split('. ')[0];
+  const makeCard = (course, index) => {
+    let name = course.split(' ')[0].slice(0, 4) + course.split(' ')[0].slice(4, course.length - 1);
     let title = course.split('. ')[1];
     let credit = course.split('. ')[2];
     let intro = course.split('Gen Ed: ')[0].split('Requisites: Prerequisite, ')[0];
@@ -106,10 +102,11 @@ class TextSearch extends React.Component {
       grading = course.trim().split('Grading status: ')[1];
     }
     return (
-      <div class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
-        <span><h5>{name} {title} {credit}</h5></span>
-        <span>Course Introduction: {intro}</span>
+      <div key={index} class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
+        <span><h5>{name} {title}</h5></span>
+        <span><span class='font-weight-bold'>Course Introduction: </span>{intro}</span>
         <br />
+        <span ><span class='font-weight-bold'>Credits: </span><span>{credit}</span><br /></span>
         {requisites !== '' &&
           <span ><span class='font-weight-bold'>Requisites: </span><span>{requisites}</span><br /></span>
         }
@@ -124,42 +121,40 @@ class TextSearch extends React.Component {
     )
   }
 
-  displayCourses = (courses) => {
+  const displayCourses = (courses) => {
     if (!courses.length) {
       return 426;
     } else {
-      return courses.map((course) => (
-        this.makeCard(course)
+      return courses.map((course, index) => (
+        makeCard(course, index)
       ));
     }
   }
 
-  render = () => {
-    console.log('State', this.state);
-    return (
-      <div>
-        <div class="container d-flex justify-content-center mt-3 mb-4">
-          <input type="text" class="col-lg-7"
-            placeholder="Search class"
-          // value={searchTerm}
-          // onChange={handleChange}
-          />
-        </div>
-        <div class='row container-fluid'>
+  return (
+    <div>
+      <div class="container d-flex justify-content-center mt-3 mb-4">
+        <input type="text" class="col-lg-7"
+          placeholder="Search class"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
+      <div class='row container-fluid'>
 
-          {/* <div class='container col-lg-1'>
+        {/* <div class='container col-lg-1'>
             <this.Filter />
           </div> */}
-          <div class='container col-lg-7'>
-            {this.Header}
-            {this.displayCourses(this.state.courses)}
-          </div>
-        </div>
-        <div>
+        <div class='container col-lg-7'>
+          {Header}
+          {displayCourses(searchResults)}
         </div>
       </div>
-    );
-  }
+      <div>
+      </div>
+    </div>
+  );
 }
+
 
 export default TextSearch;
