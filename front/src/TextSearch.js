@@ -75,7 +75,18 @@ class TextSearch extends React.Component {
     )
   }
 
-  makeCard = (course, index) => {
+  // handleSearchChange = (event) => {
+  //   this.setState({ searchTerm: event.target.value });
+  // }
+
+  // notSure = () => {
+  //   const results = this.state.courses.filter(course =>
+  //     course.toLowerCase().includes(this.state.searchTerm)
+  //   );
+  //   this.state.setState({ searchResults: results });
+  // }
+
+  makeCard = (course) => {
     let name = course.split('. ')[0];
     let title = course.split('. ')[1];
     let credit = course.split('. ')[2];
