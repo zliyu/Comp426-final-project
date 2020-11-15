@@ -21,11 +21,13 @@
   },
   "homepage": "https://github.com/Guanxinyuan/Comp426-final-project#readme",
   "dependencies": {
+    "anychart-react": "^1.4.1",
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.3.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "react-router-dom": "^5.2.0"
   }
 }
