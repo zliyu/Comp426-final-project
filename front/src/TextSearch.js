@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import axios from 'axios';
+import ReactWordcloud from 'react-wordcloud';
+// import CourseCloud from './CourseCloud';
 
 // class TextSearch extends React.Component {
 const TextSearch = () => {
@@ -13,8 +15,7 @@ const TextSearch = () => {
 
   useEffect(() => {
     getBlogPost();
-
-  }, [])
+  })
 
   const getBlogPost = () => {
     axios.get('/courses')
@@ -22,11 +23,11 @@ const TextSearch = () => {
         const data = res.data;
         setCourses(data)
         let names = [];
-        // data.forEach(course => {
-        //   names.push(course.name);
-        // });
-        // setCourseNames(names);
-        console.log('Data has been received');
+        data.forEach(course => {
+          names.push(course.split('. ')[0]);
+        });
+        setCourseNames(names);
+        // console.log('Data has been received');
       })
       .catch(() => {
         alert('Error retrieving data!!!');
@@ -75,7 +76,7 @@ const TextSearch = () => {
     setSearchTerm(e.target.value);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const results = courses.filter(course =>
       course.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -146,6 +147,7 @@ const TextSearch = () => {
             <this.Filter />
           </div> */}
         <div class='container col-lg-7'>
+          
           {Header}
           {displayCourses(searchResults)}
         </div>
@@ -156,5 +158,5 @@ const TextSearch = () => {
   );
 }
 
-
 export default TextSearch;
+
