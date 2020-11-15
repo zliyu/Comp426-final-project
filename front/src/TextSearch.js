@@ -6,7 +6,9 @@ import axios from 'axios';
 class TextSearch extends React.Component {
   state = {
     courses: [],
-    courseNames: []
+    courseNames: [],
+    searchTerm: '',
+    searchResults: []
   };
 
   componentDidMount = () => {
@@ -73,38 +75,61 @@ class TextSearch extends React.Component {
     )
   }
 
+  makeCard = (course, index) => {
+    let name = course.split('. ')[0];
+    let title = course.split('. ')[1];
+    let credit = course.split('. ')[2];
+    let intro = course.split('Gen Ed: ')[0].split('Requisites: Prerequisite, ')[0];
+    let requisites = '';
+    if (course.trim().split('Requisites: Prerequisite, ')[1] != undefined) {
+      requisites = course.trim().split('Requisites: Prerequisite, ')[1].split('Gen Ed: ')[0];
+    }
+    let ge = '';
+    let grading = '';
+    if (course.trim().split('Gen Ed: ')[1] != undefined) {
+      // courses[index]['introduction'] = course.trim().split('Gen Ed: ')[0];
+      ge = course.trim().split('Gen Ed: ')[1].split('Grading status: ')[0].split(',');
+      grading = course.trim().split('Gen Ed: ')[1].split('Grading status: ')[1].split('.')[0];
+    } else {
+      intro = course.trim().split('Grading status:')[0];
+      grading = course.trim().split('Grading status: ')[1];
+    }
+    return (
+      <div class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
+        <span><h5>{name} {title} {credit}</h5></span>
+        <span>Course Introduction: {intro}</span>
+        <br />
+        {requisites !== '' &&
+          <span ><span class='font-weight-bold'>Requisites: </span><span>{requisites}</span><br /></span>
+        }
+        {ge !== '' &&
+          <span><span class='font-weight-bold'>GE: </span><span>{ge}</span><br /></span>
+        }
+        {grading !== '' &&
+          <span><span class='font-weight-bold'>Grading Status: </span><span>{grading}</span></span>
+        }
+        <hr />
+      </div>
+    )
+  }
+
   displayCourses = (courses) => {
     if (!courses.length) {
       return 426;
     } else {
-      return courses.map((course, index) => (
-        <div key={index} class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
-          <span><h5>{course.name} {course.title}</h5></span>
-          <span>Course Introduction: {course.introduction}</span>
-          <br />
-          {course.requisites !== '' &&
-            <span ><span class='font-weight-bold'>Requisites: </span><span>{course.requisites}</span><br /></span>
-          }
-          {course.ge !== '' &&
-            <span><span class='font-weight-bold'>GE: </span><span>{course.ge}</span><br /></span>
-          }
-          {course.grading !== '' &&
-            <span><span class='font-weight-bold'>Grading Status: </span><span>{course.grading}</span></span>
-          }
-          <hr />
-        </div>
+      return courses.map((course) => (
+        this.makeCard(course)
       ));
     }
   }
-
 
   render = () => {
     console.log('State', this.state);
     return (
       <div>
         <div class="container d-flex justify-content-center mt-3 mb-4">
-          <input type="text" class="col-lg-5"
-          // placeholder="Search"
+          <input type="text" class="col-lg-7"
+            placeholder="Search class"
           // value={searchTerm}
           // onChange={handleChange}
           />
