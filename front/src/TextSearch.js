@@ -15,7 +15,7 @@ const TextSearch = () => {
 
   useEffect(() => {
     getBlogPost();
-  })
+  }, []);
 
   const getBlogPost = () => {
     axios.get('/courses')
@@ -147,9 +147,12 @@ const TextSearch = () => {
             <this.Filter />
           </div> */}
         <div class='container col-lg-7'>
-          
+
           {Header}
           {displayCourses(searchResults)}
+
+
+
         </div>
       </div>
       <div>
