@@ -46,7 +46,7 @@ ul.header li a {
   margin-bottom: 10px;
 }
 
-button {
+/* button {
   display: block;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -55,7 +55,7 @@ button {
   border: 0;
   border-radius: 50%;
   padding: .7em 1em;
-  /* margin: 4em auto 3em; */
+   margin: 4em auto 3em; 
   margin: 20px auto;
   text-align: center;
   color: #fff;
@@ -64,9 +64,9 @@ button {
 
   will-change: transform, filter;
   transition: all 0.3s ease-out;
-}
+} */
 
-button .fa {
+/* button .fa {
   font-size: 130px;
   line-height: 200px;
   margin: 0;
@@ -80,7 +80,7 @@ button:active {
 }
 button:focus {
   outline: 0;
-}
+} */
 
 .fa {
   display: inline-block;
