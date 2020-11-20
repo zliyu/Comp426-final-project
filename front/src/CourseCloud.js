@@ -47,7 +47,7 @@ const CourseCloud = () => {
     getBlogPost();
   }, []);
 
-  const getBlogPost = () => {
+  const getBlogPost = () => { 
     axios.get('/courses')
       .then((res) => {
         const data = res.data;
