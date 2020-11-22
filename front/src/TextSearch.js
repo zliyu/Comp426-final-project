@@ -20,12 +20,13 @@ const TextSearch = () => {
   const getBlogPost = () => {
     axios.get('/courses')
       .then((res) => {
+        console.log('you are here')
         const data = res.data;
         setCourses(data)
         let names = [];
-        data.forEach(course => {
-          names.push(course.split('. ')[0]);
-        });
+        // data.forEach(course => {
+        //   names.push(course.split('. ')[0]);
+        // });
         setCourseNames(names);
         // console.log('Data has been received');
       })
@@ -78,55 +79,46 @@ const TextSearch = () => {
 
   useEffect(() => {
     const results = courses.filter(course =>
-      course.toLowerCase().includes(searchTerm.toLowerCase())
+      course.name.toLowerCase().includes(searchTerm.toLowerCase())
+      || course.title.toLowerCase().includes(searchTerm.toLowerCase())
+      || course.credits.toLowerCase().includes(searchTerm.toLowerCase())
+      || course.introduction.toLowerCase().includes(searchTerm.toLowerCase())
+      || course.requisites.toLowerCase().includes(searchTerm.toLowerCase())
+      || course.ge.join(' ').toLowerCase().includes(searchTerm.toLowerCase())
+      // || course.grading.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm]);
 
   const makeCard = (course, index) => {
-    let name = course.split(' ')[0].slice(0, 4) + course.split(' ')[0].slice(4, course.length - 1);
-    let title = course.split('. ')[1];
-    let credit = course.split('. ')[2];
-    let intro = course.split('Gen Ed: ')[0].split('Requisites: Prerequisite, ')[0];
-    let requisites = '';
-    if (course.trim().split('Requisites: Prerequisite, ')[1] != undefined) {
-      requisites = course.trim().split('Requisites: Prerequisite, ')[1].split('Gen Ed: ')[0];
-    }
-    let ge = '';
-    let grading = '';
-    if (course.trim().split('Gen Ed: ')[1] != undefined) {
-      // courses[index]['introduction'] = course.trim().split('Gen Ed: ')[0];
-      ge = course.trim().split('Gen Ed: ')[1].split('Grading status: ')[0].split(',');
-      grading = course.trim().split('Gen Ed: ')[1].split('Grading status: ')[1].split('.')[0];
-    } else {
-      intro = course.trim().split('Grading status:')[0];
-      grading = course.trim().split('Grading status: ')[1];
-    }
     return (
       <div key={index} class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
-        <span><h5>{name} {title}</h5></span>
-        <span><span class='font-weight-bold'>Course Introduction: </span>{intro}</span>
+        <span><h5>{course.name} {course.title}</h5></span>
+        <span><span class='font-weight-bold'>Course Introduction: </span>{course.introduction}</span>
         <br />
-        <span ><span class='font-weight-bold'>Credits: </span><span>{credit}</span><br /></span>
-        {requisites !== '' &&
-          <span ><span class='font-weight-bold'>Requisites: </span><span>{requisites}</span><br /></span>
+        <span ><span class='font-weight-bold'>Credits: </span><span>{course.credits}</span><br /></span>
+        {course.requisites !== 's' &&
+          <span ><span class='font-weight-bold'>Requisites: </span><span>{course.requisites}</span><br /></span>
         }
-        {ge !== '' &&
-          <span><span class='font-weight-bold'>GE: </span><span>{ge}</span><br /></span>
+        {course.ge[0] !== 's' &&
+          <span><span class='font-weight-bold'>GE: </span><span>{course.ge}</span><br /></span>
         }
-        {grading !== '' &&
-          <span><span class='font-weight-bold'>Grading Status: </span><span>{grading}</span></span>
+        {course.grading !== 's' &&
+          <span><span class='font-weight-bold'>Grading Status: </span><span>{course.grading}</span></span>
         }
         <hr />
       </div>
     )
   }
 
-  const displayCourses = (courses) => {
-    if (!courses.length) {
+  const displayCourses = (searches) => {
+    if (!searches.length) {
       return 426;
     } else {
-      return courses.map((course, index) => (
+      if (searches.length > 100) {
+        searches = searches.slice(0, 100);
+      }
+      return searches.map((course, index) => (
         makeCard(course, index)
       ));
     }
