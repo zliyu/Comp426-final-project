@@ -1,4 +1,4 @@
-import Reace from "react";
+import React from "react";
 
 const Error = ({ message }) => (
     <div>
