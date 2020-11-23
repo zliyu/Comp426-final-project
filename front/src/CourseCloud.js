@@ -2,40 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReactWordcloud from 'react-wordcloud';
 import axios from 'axios';
 
-const data = [
-  { text: 'Hey', value: 1000 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'Hey', value: 1000 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'Hey', value: 1000 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'Hey', value: 1000 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'lol', value: 200 },
-  { text: 'first impression', value: 800 },
-  { text: 'very cool', value: 100 },
-  { text: 'duck', value: 10 },
-];
-
 const CourseCloud = () => {
 
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -47,15 +13,12 @@ const CourseCloud = () => {
     getBlogPost();
   }, []);
 
-  const getBlogPost = () => { 
+  const getBlogPost = () => {
     axios.get('/courses')
       .then((res) => {
         const data = res.data;
         setCourses(data)
         let names = [];
-        data.forEach(course => {
-          names.push(course.split('. ')[0]);
-        });
         setCourseNames(names);
         // console.log('Data has been received');
       })
@@ -69,30 +32,65 @@ const CourseCloud = () => {
   };
 
   useEffect(() => {
-    const results = courses.filter(course =>
-      course.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let results = [];
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].name.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].title.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].credits.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].ge.join(', ').toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].introduction.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].requisites.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    // || course.grading.toLowerCase().includes(searchTerm.toLowerCase())
     setSearchResults(results);
   }, [searchTerm]);
 
   const displayCloud = () => {
-    let length = searchResults.length;
-    let names = searchResults.map((r, i) => {
-      let t = r.split(' ')[0].slice(0, 4) + r.split('. ')[0].slice(4, r.length - 1);
+    let results = []
+    if (searchResults.length > 100) {
+      results = [...searchResults.slice(0, 100)];
+    } else {
+      results = [...searchResults];
+    }
+    let length = results.length;
+    console.log(length);
+    let names = results.map((r, i) => {
       let v = 0;
       if (i / length == 0) {
         v = 1000;
       } else if (i / length <= 0.3) {
-        v = 600;
-      } else if (i / length <= 0.5) {
-        v = 400;
-      } else if (i / length <= 0.8) {
-        v = 300;
-      } else {
         v = 200;
+      } else if (i / length <= 0.5) {
+        v = 150;
+      } else if (i / length <= 0.8) {
+        v = 100;
+      } else {
+        v = 50;
       }
       console.log("i", i / length);
-      return { text: t, value: v };
+      return { text: r.name, value: v };
     });
     return (
       <div>
@@ -114,9 +112,9 @@ const CourseCloud = () => {
   const options = {
     rotations: 0,
     fontWeight: "bold",
-    fontSizes: [15, 80],
+    fontSizes: [15, 110],
     colors: ['#581845', '#900C3F', '#C70039', '#FF5733 ', '#FFC300 '],
-    spiral:'archimedean',
+    spiral: 'archimedean',
     enableTooltip: false
   };
   const size = [1150, 600];

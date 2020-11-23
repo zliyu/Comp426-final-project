@@ -78,15 +78,38 @@ const TextSearch = () => {
   };
 
   useEffect(() => {
-    const results = courses.filter(course =>
-      course.name.toLowerCase().includes(searchTerm.toLowerCase())
-      || course.title.toLowerCase().includes(searchTerm.toLowerCase())
-      || course.credits.toLowerCase().includes(searchTerm.toLowerCase())
-      || course.introduction.toLowerCase().includes(searchTerm.toLowerCase())
-      || course.requisites.toLowerCase().includes(searchTerm.toLowerCase())
-      || course.ge.join(' ').toLowerCase().includes(searchTerm.toLowerCase())
-      // || course.grading.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let results = [];
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].name.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].title.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].credits.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].ge.join(', ').toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].introduction.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].requisites.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+    }
+    // || course.grading.toLowerCase().includes(searchTerm.toLowerCase())
     setSearchResults(results);
   }, [searchTerm]);
 
