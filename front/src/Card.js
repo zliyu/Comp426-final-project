@@ -6,9 +6,9 @@ import { NavLink } from "react-router-dom";
 const Card = (props) => {
     let c = props.course;
     let a = props.inlist;
-    if(c.added==undefined){c.added=false};
+    //if(c.added==undefined){c.added=false};
+
     const [added, setAdded] = useState(a);
-    
 
     const addtolist = () =>{
         let cl = JSON.parse(localStorage.getItem('courselist'));
@@ -25,9 +25,10 @@ const Card = (props) => {
     const removefromlist = () =>{
         let cl = JSON.parse(localStorage.getItem('courselist'));
         console.log(cl);
+        setAdded(false);
+        c.added = false;
         if(cl==null){
-            setAdded(false);
-            c.added = false;
+            
             return;
         }
         //funtion(elt){return elt.name != c.name}

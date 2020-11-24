@@ -25,7 +25,7 @@ const CourseList = (props) => {
                 
             </div>
             <div className="col-8" style={{ backgroundColor: "rgb(250, 250, 250)" }}>
-                {cl==null?
+                {(cl==null || cl==[])?
                 <h6>You haven't saved any courses.</h6>:
                 cl.map((data) => { return (<div><br></br><Card course={data} inlist={true}></Card></div>);})}                
             </div>
