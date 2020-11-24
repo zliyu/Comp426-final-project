@@ -7,7 +7,6 @@ import SpeechSearch from "./SpeechSearch";
 import CourseCloud from "./CourseCloud";
 import SignIn from "./SignIn"
 import Register from "./Register"
-import Result from "./Result"
 import CourseList from "./CourseList"
 import Result from "./FilterSearch"
 import FilterSearch from "./FilterSearch";

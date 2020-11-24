@@ -1,6 +1,5 @@
 {
-  "homepage": "http://guanxinyuan.github.io/Comp426-final-project",
-  "name": "comp426-final-project",
+  "name": "unc-course-search",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Guanxinyuan/Comp426-final-project.git"
+    "url": "git+https://github.com/spjones97/unc-course-search.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Guanxinyuan/Comp426-final-project/issues"
+    "url": "https://github.com/spjones97/unc-course-search/issues"
   },
   "dependencies": {
     "anychart-react": "^1.4.1",
