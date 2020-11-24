@@ -35,34 +35,6 @@ const TextSearch = () => {
       })
   }
 
-  const Filter = () => {
-    return (
-      <div>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Semester</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Major</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Subject</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>GE</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Credit Hours</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Honors or Non-Honors</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Professor Rate</option>
-        </select>
-      </div>
-    )
-  }
-
   const Header = () => {
     return (
       <div class='container mb-3'>
@@ -157,17 +129,9 @@ const TextSearch = () => {
         />
       </div>
       <div class='row container-fluid'>
-
-        {/* <div class='container col-lg-1'>
-            <this.Filter />
-          </div> */}
         <div class='container col-lg-7'>
-
           {Header}
           {displayCourses(searchResults)}
-
-
-
         </div>
       </div>
       <div>
