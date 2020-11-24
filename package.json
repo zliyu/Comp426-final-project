@@ -1,5 +1,6 @@
 {
-  "name": "Comp426-final-project",
+  "homepage": "http://guanxinyuan.github.io/Comp426-final-project",
+  "name": "comp426-final-project",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "client": "cd front && npm start",
-    "dev": "concurrently -n 'server,client' -c 'yellow,green \"nodemon server.js\" \"npm run client\""
+    "dev": "concurrently -n 'server,client' -c 'yellow,green \"nodemon server.js\" \"npm run client\"",
+    "predeploy": "npm run dev",
+    "deploy": "gh-pages -d dev"
   },
   "repository": {
     "type": "git",
@@ -19,15 +22,19 @@
   "bugs": {
     "url": "https://github.com/Guanxinyuan/Comp426-final-project/issues"
   },
-  "homepage": "https://github.com/Guanxinyuan/Comp426-final-project#readme",
   "dependencies": {
     "anychart-react": "^1.4.1",
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.3.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
