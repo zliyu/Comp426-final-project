@@ -15,48 +15,45 @@ const Result = (props) => {
 
     const filtering = (filter) => {
         let results = [];
-        for (let i = 0; i < 50; i++) {
-            if(courses[i].name[6]==9){
-                results.push(courses[i]);
+        let dept_y = filter.dept_y;
+        let dept_n = filter.dept_n;
+        let num_min = filter.num_min;
+        let num_max = filter.num_max;
+        let ge = filter.ge;
+        
+        for (let i = 0; i < courses.length; i++) {
+            let course_dept = courses[i].name.split(" ")[0];
+            let course_num = courses[i].name.split(" ")[1]
+            for (let j = 0; j < dept_y.length; j++) { //Search for dept_y
+                if (course_dept.toLowerCase().includes(dept_y[j].toLowerCase()) && !results.includes(courses[i])) {
+                    if (parseInt(course_num) >= parseInt(num_min) && !results.includes(courses[i])) {       // course number min
+                        if (parseInt(course_num) <= parseInt(num_max) && !results.includes(courses[i])) {   // course number max
+
+                            let ge_in = true;
+                            for (let k = 0; k < ge.length; k++) {       //ge
+                                if (!courses[i].ge.includes(ge[k])) {
+                                    ge_in = false;
+                                }
+                            }
+                            if (ge_in) {
+                                results.push(courses[i]);
+                            }
+
+                        }
+                    }
+                }
             }
+
         }
-        // for (let i = 0; i < courses.length; i++) {
-
-        //     let dept_y = filter.dept_y.split(",").trim();
-        //     for (let i = 0; i < dept_y.length; i++) { //Search for dept_y
-        //         let dept = dept_y[i].split(" ")[0];
-        //         if (courses[i].name.split(" ")[0].toLowerCase().includes(dept.toLowerCase()) && !results.includes(courses[i])) {
-        //             results.push(courses[i]);
-        //         }
-        //     }
-
-        //     let dept_n = filter.dept_n.split(",").trim();
-        //     for (let i = 0; i < dept_n.length; i++) { // Search for dept_n
-        //         let dept = dept_n[i].split(" ")[0];
-        //         if (courses[i].name.split(" ")[0].toLowerCase().includes(dept.toLowerCase()) && !results.includes(courses[i])) {
-        //             results.push(courses[i]);
-        //         }
-        //     }
-
-        //     let num_min = filter.num_min;
-        //     if (parseInt(courses[i].name.split(" ")[1]) >= parseInt(num_min) && !results.includes(courses[i])) {
-        //         results.push(courses[i]);
-        //     }
-
-        //     let num_max = filter.num_max;
-        //     if (parseInt(courses[i].name.split(" ")[1]) <= parseInt(num_max) && !results.includes(courses[i])) {
-        //         results.push(courses[i]);
-        //     }
-        //     let ge_search = filter.ge.split(",").trim();
-        //     for (let i = 0; i < ge_search.length; i++) {
-        //         for (let j = 0; j < courses[i].ge.length; j++) {
-        //             if (ge_search[i].toLowerCase() == courses[i].ge.length.toLowerCase() & !results.includes(courses[i])) {
-        //                 results.push(courses[i]);
-        //             }
-        //         }
-        //     }
-        // }
+        let results_final = []
+        if (results.length > 50) {
+            results_final = [...results.slice(0, 50)]
+        } else {
+            results_final = [...results]
+        }
         setRes(results);
+        console.log(results_final)
+        return results_final;
     }
 
     return (
@@ -65,7 +62,7 @@ const Result = (props) => {
                 <Filter apply={filtering}></Filter>
             </div>
             <div className="col-8" style={{ backgroundColor: "rgb(250, 250, 250)" }}>
-                {res.map((data) => { return (<div><br></br><Card course={data}></Card></div>);})}                
+                {res.map((data) => { return (<div><br></br><Card course={data}></Card></div>); })}
             </div>
             <div className="col-1">
                 {/* nothing here*/}
