@@ -19,6 +19,7 @@ const Result = (props) => {
         let dept_n = filter.dept_n;
         let num_min = filter.num_min;
         let num_max = filter.num_max;
+        console.log(filter.ge);
         let ge = filter.ge;
         
         for (let i = 0; i < courses.length; i++) {
