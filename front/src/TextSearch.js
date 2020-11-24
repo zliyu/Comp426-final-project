@@ -12,6 +12,59 @@ const TextSearch = () => {
   const [searchResults, setSearchResults] = React.useState([]);
   const [courses, setCourses] = React.useState([]);
   const [courseNames, setCourseNames] = React.useState([]);
+  const [filter, setFilter] = React.useState({
+    sort: 0, // sort result by type 0-5
+    num_min: 0, // max course number allowed (inclusive)
+    num_max: 700, // max course number allowed (inclusive)
+    cr_min: 0, // min credit hour allowed (inclusive)
+    cr_max: 4, // max credit hour allowed (inclusive)
+    dept_y: "", // list of departments can appear in the result;
+    description: "",
+    dept_n: [], // list of departments not allowed in the result;
+    ge: [], // list of gen ed the user is interested in;
+  });
+
+
+
+  const Filter = (filter) => {
+    let results = [];
+    for (let i = 0; i < courses.length; i++) {
+
+      let dept_y = filter.dept_y.split(",").trim();
+      for (let i = 0; i < dept_y.length; i++) { //Search for dept_y
+        let dept = dept_y[i].split(" ")[0];
+        if (courses[i].name.split(" ")[0].toLowerCase().includes(dept.toLowerCase()) && !results.includes(courses[i])) {
+          results.push(courses[i]);
+        }
+      }
+
+      let dept_n = filter.dept_n.split(",").trim();
+      for (let i = 0; i < dept_n.length; i++) { // Search for dept_n
+        let dept = dept_n[i].split(" ")[0];
+        if (courses[i].name.split(" ")[0].toLowerCase().includes(dept.toLowerCase()) && !results.includes(courses[i])) {
+          results.push(courses[i]);
+        }
+      }
+
+      let num_min = filter.num_min;
+      if (parseInt(courses[i].name.split(" ")[1]) >= parseInt(num_min) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+
+      let num_max = filter.num_max;
+      if (parseInt(courses[i].name.split(" ")[1]) <= parseInt(num_max) && !results.includes(courses[i])) {
+        results.push(courses[i]);
+      }
+      let ge_search = filter.ge.split(",").trim();
+      for (let i = 0; i < ge_search.length; i++) {
+        for (let j = 0; j < courses[i].ge.length; j++) {
+          if (ge_search[i].toLowerCase() == courses[i].ge.length.toLowerCase() & !results.includes(courses[i])) {
+            results.push(courses[i]);
+          }
+        }
+      }
+    }
+  }
 
   useEffect(() => {
     getBlogPost();
@@ -33,34 +86,6 @@ const TextSearch = () => {
       .catch(() => {
         alert('Error retrieving data!!!');
       })
-  }
-
-  const Filter = () => {
-    return (
-      <div>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Semester</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Major</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Subject</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>GE</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Credit Hours</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Honors or Non-Honors</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Professor Rate</option>
-        </select>
-      </div>
-    )
   }
 
   const Header = () => {
@@ -113,6 +138,7 @@ const TextSearch = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
+
   const makeCard = (course, index) => {
     return (
       <div key={index} class='container border border-left-0 border-right-0 border-bottom-0 border-dark mb-0 mt-10 pt-3' >
@@ -136,7 +162,7 @@ const TextSearch = () => {
 
   const displayCourses = (searches) => {
     if (!searches.length) {
-      return 426;
+      return "Your Course Recommendation List";
     } else {
       if (searches.length > 100) {
         searches = searches.slice(0, 100);
@@ -149,6 +175,7 @@ const TextSearch = () => {
 
   return (
     <div>
+      <h2 class='text-center pt-3 font-weight-bold'>Search Your Courses</h2>
       <div class="container d-flex justify-content-center mt-3 mb-4">
         <input type="text" class="col-lg-7"
           placeholder="Search class"
@@ -157,17 +184,9 @@ const TextSearch = () => {
         />
       </div>
       <div class='row container-fluid'>
-
-        {/* <div class='container col-lg-1'>
-            <this.Filter />
-          </div> */}
         <div class='container col-lg-7'>
-
           {Header}
           {displayCourses(searchResults)}
-
-
-
         </div>
       </div>
       <div>

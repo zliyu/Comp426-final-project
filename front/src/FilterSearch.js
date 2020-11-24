@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import Card from "./Card";
 const courses = require("./courses.json");
 
-const Result = (props) => {
+const FilterSearch = (props) => {
     const [res, setRes] = useState([]);
     const test = (filter) => {
         console.log("Calling from Result.js");
@@ -21,7 +21,7 @@ const Result = (props) => {
         let num_max = filter.num_max;
         console.log(filter.ge);
         let ge = filter.ge;
-        
+
         for (let i = 0; i < courses.length; i++) {
             let course_dept = courses[i].name.split(" ")[0];
             let course_num = courses[i].name.split(" ")[1]
@@ -75,5 +75,5 @@ const Result = (props) => {
 
 }
 
-export default Result;
+export default FilterSearch;
 

@@ -120,8 +120,9 @@ const CourseCloud = () => {
   const size = [1150, 600];
 
   return (
-    <div
-    >   <div class="container d-flex justify-content-center mt-3 mb-4">
+    <div>
+      <h2 class='text-center pt-3 font-weight-bold'>Course Cloud</h2>
+      <div class="container d-flex justify-content-center mt-3 mb-4">
         <input type="text" class="col-lg-7"
           placeholder="Search class"
           value={searchTerm}
