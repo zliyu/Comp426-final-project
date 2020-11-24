@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Filter from "./Filter";
 
-const Result = (props) => {
+const FilterSearch = (props) => {
     const test = (filter) =>{
         console.log("Calling from Result.js");
         console.log(filter);
@@ -28,5 +28,5 @@ const Result = (props) => {
 
 }
 
-export default Result;
+export default FilterSearch;
 

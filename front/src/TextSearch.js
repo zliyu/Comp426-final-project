@@ -162,7 +162,7 @@ const TextSearch = () => {
 
   const displayCourses = (searches) => {
     if (!searches.length) {
-      return "Your Course Recommendations";
+      return "Your Course Recommendation List";
     } else {
       if (searches.length > 100) {
         searches = searches.slice(0, 100);
@@ -175,6 +175,7 @@ const TextSearch = () => {
 
   return (
     <div>
+      <h2 class='text-center pt-3 font-weight-bold'>Search Your Courses</h2>
       <div class="container d-flex justify-content-center mt-3 mb-4">
         <input type="text" class="col-lg-7"
           placeholder="Search class"

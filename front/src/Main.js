@@ -6,7 +6,8 @@ import SpeechSearch from "./SpeechSearch";
 import CourseCloud from "./CourseCloud";
 import SignIn from "./SignIn"
 import Register from "./Register"
-import Result from "./Result"
+import Result from "./FilterSearch"
+import FilterSearch from "./FilterSearch";
 
 class Main extends Component {
     render() {
@@ -39,7 +40,7 @@ class Main extends Component {
                                     <NavLink className="nav-link" to='/courseCloud'>Course Cloud</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to='/result'>Result</NavLink>
+                                    <NavLink className="nav-link" to='/filterSearch'>Search by Filter</NavLink>
                                 </li>
                             </ul>
                             <ul className="navbar-nav">
@@ -49,7 +50,7 @@ class Main extends Component {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to='/register'>Register</NavLink>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </nav>
@@ -62,7 +63,7 @@ class Main extends Component {
                         <Route path="/courseCloud" component={CourseCloud} />
                         <Route path="/signin" component={SignIn} />
                         <Route path="/register" component={Register} />
-                        <Route path="/result" component={Result} />
+                        <Route path="/filterSearch" component={FilterSearch} />
                     </div>
                 </div>
             </HashRouter>

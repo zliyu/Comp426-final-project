@@ -5,7 +5,7 @@ function Home() {
     <div>
       <div class='container mb-3'>
         <div class='page-header'>
-          <h1>Your Course Recommendations</h1>
+          {/* <h1>Your Course Recommendations</h1> */}
         </div>
       </div>
       <div class='container pt-3' style={{ height: '60px' }}>
