@@ -7,6 +7,8 @@ import SpeechSearch from "./SpeechSearch";
 import CourseCloud from "./CourseCloud";
 import SignIn from "./SignIn"
 import Register from "./Register"
+import Result from "./Result"
+import CourseList from "./CourseList"
 import Result from "./FilterSearch"
 import FilterSearch from "./FilterSearch";
 
@@ -46,11 +48,15 @@ class Main extends Component {
                             </ul>
                             <ul className="navbar-nav">
                                 <li className="nav-item">
+                                    <NavLink className="nav-link" to='/courselist'>My Course List</NavLink>
+                                </li>
+                                {/* <li className="nav-item">
                                     <NavLink className="nav-link" to='/signin'>Sign In</NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to='/register'>Register</NavLink>
-                                </li>
+                                </li> */}
+                                
 
                             </ul>
                         </div>
@@ -64,6 +70,7 @@ class Main extends Component {
                         <Route path="/courseCloud" component={CourseCloud} />
                         <Route path="/signin" component={SignIn} />
                         <Route path="/register" component={Register} />
+                        <Route path="/courselist" component={CourseList} />
                         <Route path="/filterSearch" component={FilterSearch} />
                     </div>
                 </div>
