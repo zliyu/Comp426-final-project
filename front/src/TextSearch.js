@@ -162,7 +162,7 @@ const TextSearch = () => {
 
   const displayCourses = (searches) => {
     if (!searches.length) {
-      return 426;
+      return "Your Course Recommendations";
     } else {
       if (searches.length > 100) {
         searches = searches.slice(0, 100);
