@@ -1,14 +1,15 @@
 {
-  "name": "Comp426-final-project",
+  "name": "comp426-final-project",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "client": "cd front && npm start",
+    "client": "npm start --prefix front",
     "backend": "nodemon backend.js",
-    "dev": "concurrently -n 'server,client' -c 'yellow,green \"nodemon server.js\" \"npm run client\" \"npm run backend\""
+    "dev": "concurrently \"npm run backend\" \"npm run client\"",
+    "REPLACED": "concurrently -n 'server,client' -c 'yellow,green \"nodemon server.js\" \"npm run backend\""
   },
   "repository": {
     "type": "git",
