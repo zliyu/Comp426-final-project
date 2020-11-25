@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+let loggedin = localStorage.getItem('log');
+let user = localStorage.getItem('currentuser');
 
 const Card = (props) => {
+    
     let c = props.course;
+
     let cl = JSON.parse(localStorage.getItem('courselist'));
     if (cl == null) { cl = []; }
     let alreadyadded = false;
@@ -51,12 +55,13 @@ const Card = (props) => {
                 <h5 style={{ display: "inline" }}>
                     <b>{c.name}</b> {c.title}
                     <span style={{ color: "grey" }}> ({c.credits})</span></h5>
+                
                 {!added ?
-                    <button type="button" className="btn btn-success btn-sm" style={{ float: "right" }} onClick={addtolist}>
+                    <button type="button" className="btn btn-success btn-sm" style={{ float: "right" }} onClick={addtolist} disabled={!loggedin}>
                         <i className="fas fa-plus-circle"></i><b>&nbsp;Add to list</b>
                     </button> :
-                    <button type="button" className="btn btn-danger btn-sm" style={{ float: "right" }} onClick={removefromlist}>
-                        <i class="fas fa-minus-circle"></i><b>&nbsp;Remove from list</b>
+                    <button type="button" className="btn btn-danger btn-sm" style={{ float: "right" }} onClick={removefromlist} disabled={!loggedin}>
+                        <i className="fas fa-minus-circle"></i><b>&nbsp;Remove from list</b>
                     </button>}
                 <br /><b>Gen Ed:</b> {c.ge[0] == "s" ? "None" : c.ge}<br />
                 <b>Prereqs:</b> {c.requisites == "s" ? "None" : c.requisites}<br />

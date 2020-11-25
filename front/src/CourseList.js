@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Card from "./Card";
 
 const CourseList = (props) => {
-    
+    let user = localStorage.getItem('currentuser');
     let cl = JSON.parse(localStorage.getItem('courselist'));
     return (
         <div className="container">
@@ -18,4 +18,3 @@ const CourseList = (props) => {
 }
 
 export default CourseList;
-

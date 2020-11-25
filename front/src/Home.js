@@ -12,6 +12,8 @@ function Home() {
       <NavLink className="nav-link" to='/courseCloud'>Course Cloud</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Visualize your search result with Word Cloud.
       <br></br>
       <NavLink className="nav-link" to='/result'>Search by Filter</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Search all UNC courses with advanced filters.
+      <br></br>
+      
     </div>
   );
 }

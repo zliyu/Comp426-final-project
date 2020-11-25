@@ -11,7 +11,29 @@ const SignIn = (props) => {
     const [pwverify, setPwverify] = useState(true); //password
 
     const register = () => {
-        console.log("username: " + username + "; email: " + email + "; pw: " + password);
+        let newuser = {
+            username: username,
+            password: password,
+        };
+
+        let users = JSON.parse(localStorage.getItem('users'));
+        if (users == null) { users = []; }
+        //console.log(users);
+        let alreadyadded = false;
+        users.forEach(element => {
+            if (element.username == newuser.username) {
+                alreadyadded = true;
+            }
+        });
+        if(alreadyadded){ alert("Username taken."); return; }
+        users.push(newuser);
+        localStorage.setItem('users', JSON.stringify(users));
+        console.log(JSON.parse(localStorage.getItem('users')));
+        
+        document.getElementById("username").value="";
+        document.getElementById("password").value="";
+        setUsername("");
+        setPassword("");
     }
 
     const unChange = (e) => {
@@ -41,7 +63,7 @@ const SignIn = (props) => {
                     <label for="username">Username<span className="text-danger">*</span></label>
                     <input className="form-control" id="username" onChange={unChange} />
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={emChange} />                    
                     {emverify ?
@@ -49,7 +71,7 @@ const SignIn = (props) => {
                         password.</small> :
                         <small id="emailHelp" className="form-text text-danger">This does not look like a valid email address.</small>
                     }
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label for="password">Password<span className="text-danger">*</span></label>
                     <input type="password" className="form-control" id="password" aria-describedby="pwHelp" onChange={pwChange} />

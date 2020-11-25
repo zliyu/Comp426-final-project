@@ -12,9 +12,7 @@ const Result = (props) => {
         let results = [];
 
         let sortbyge = (filter.sort == 1);
-        console.log("sort by ge: "+sortbyge);    
         let dept_y = filter.dept_y;
-        console.log("depty:"+dept_y);
         let dept_n = filter.dept_n;
         let cr_min = filter.cr_min;
         let cr_max = filter.cr_max;
@@ -31,9 +29,7 @@ const Result = (props) => {
             let course_dept = thiscourse.name.split(" ")[0];
             let course_num = thiscourse.name.split(" ")[1];
             let cr = parseFloat(thiscourse.credits.split(" ")[0]);
-            console.log("depty:"+dept_y);
             if(dept_y.length>0){
-                console.log("in");
                 if(!dept_y.includes(course_dept)){continue;}
             }            
             if(dept_n.includes(course_dept)){continue;}
@@ -48,13 +44,13 @@ const Result = (props) => {
             results.forEach((elt)=>{
                 elt.num_ge = 0;
                 if(elt.ge[0]!="s"){
-                    console.log("thiscourse'sge:"+elt.ge);
-                    console.log("ge to match: "+gened);
+                    // console.log("thiscourse'sge:"+elt.ge);
+                    // console.log("ge to match: "+gened);
                     elt.ge.forEach((req)=>{                       
                         if(gened.includes(req.trim().slice(0,2))){elt.num_ge++};
                     })
                 }
-                console.log(elt.name + " ge: "+elt.num_ge);
+                //console.log(elt.name + " ge: "+elt.num_ge);
             })
             results.sort(function(a,b){
                 return b.num_ge - a.num_ge;

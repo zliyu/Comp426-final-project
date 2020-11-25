@@ -8,8 +8,9 @@ import SignIn from "./SignIn"
 import Register from "./Register"
 import Result from "./Result"
 import CourseList from "./CourseList"
-
+let loggedin = localStorage.getItem('log');
 class Main extends Component {
+    
     render() {
         return (
             <HashRouter>
@@ -44,15 +45,16 @@ class Main extends Component {
                                 </li>
                             </ul>
                             <ul className="navbar-nav">
-                                <li className="nav-item">
+                                
+                                {!loggedin?"":<li className="nav-item">
                                     <NavLink className="nav-link" to='/courselist'>My Course List</NavLink>
-                                </li>
-                                {/* <li className="nav-item">
+                                </li>}
+                                {!loggedin?<li className="nav-item">
                                     <NavLink className="nav-link" to='/signin'>Sign In</NavLink>
-                                </li>
-                                <li className="nav-item">
+                                </li>:""}
+                                {!loggedin?<li className="nav-item">
                                     <NavLink className="nav-link" to='/register'>Register</NavLink>
-                                </li> */}
+                                </li>:""}
                                 
                             </ul>
                         </div>
