@@ -40,7 +40,7 @@ class Main extends Component {
                                     <NavLink className="nav-link" to='/courseCloud'>Course Cloud</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to='/result'>All Courses</NavLink>
+                                    <NavLink className="nav-link" to='/result'>Search by Filter</NavLink>
                                 </li>
                             </ul>
                             <ul className="navbar-nav">

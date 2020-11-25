@@ -3,6 +3,7 @@ import { Route, NavLink, HashRouter } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import axios from 'axios';
 import ReactWordcloud from 'react-wordcloud';
+const courses = require("./courses.json");
 // import CourseCloud from './CourseCloud';
 
 // class TextSearch extends React.Component {
@@ -10,58 +11,30 @@ const TextSearch = () => {
 
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
-  const [courses, setCourses] = React.useState([]);
+  // const [courses, setCourses] = React.useState(data);
   const [courseNames, setCourseNames] = React.useState([]);
 
-  useEffect(() => {
-    getBlogPost();
-  }, []);
+  // useEffect(() => {
+  //   getBlogPost();
+  // }, []);
 
-  const getBlogPost = () => {
-    axios.get('/courses')
-      .then((res) => {
-        console.log('you are here')
-        const data = res.data;
-        setCourses(data)
-        let names = [];
-        // data.forEach(course => {
-        //   names.push(course.split('. ')[0]);
-        // });
-        setCourseNames(names);
-        // console.log('Data has been received');
-      })
-      .catch(() => {
-        alert('Error retrieving data!!!');
-      })
-  }
-
-  const Filter = () => {
-    return (
-      <div>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Semester</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Major</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Subject</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>GE</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Credit Hours</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Honors or Non-Honors</option>
-        </select>
-        <select class="mdb-select md-form border border-buttom-0" style={{ width: '350px', height: '60px' }}>
-          <option value="" disabled selected>Professor Rate</option>
-        </select>
-      </div>
-    )
-  }
+  // const getBlogPost = () => {
+  //   axios.get('/courses')
+  //     .then((res) => {
+  //       console.log('you are here')
+  //       const data = res.data;
+  //       setCourses(data)
+  //       let names = [];
+  //       // data.forEach(course => {
+  //       //   names.push(course.split('. ')[0]);
+  //       // });
+  //       setCourseNames(names);
+  //       // console.log('Data has been received');
+  //     })
+  //     .catch(() => {
+  //       alert('Error retrieving data!!!');
+  //     })
+  // }
 
   const Header = () => {
     return (
@@ -136,7 +109,7 @@ const TextSearch = () => {
 
   const displayCourses = (searches) => {
     if (!searches.length) {
-      return 426;
+      return "No results";
     } else {
       if (searches.length > 100) {
         searches = searches.slice(0, 100);

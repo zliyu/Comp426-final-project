@@ -1,19 +1,17 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
-      <div class='container mb-3'>
-        <div class='page-header'>
-          <h1>Your Course Recommendations</h1>
-        </div>
-      </div>
-      <div class='container pt-3' style={{ height: '60px' }}>
-        <h1 class='text-center font-weight-bold display-4'>UNC Course Search</h1>
-      </div>
-      <hr />
-      <div class='row container-fluid'>
-      </div>
+    <div className="container">
+      <br></br>
+      <center><h1>UNC Course Search</h1></center><hr/>
+      <br></br>
+      <NavLink className="nav-link" to="/textSearch">Search by Text</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Quick and simple search by keyword.
+      <br></br>
+      <NavLink className="nav-link" to='/courseCloud'>Course Cloud</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Visualize your search result with Word Cloud.
+      <br></br>
+      <NavLink className="nav-link" to='/result'>Search by Filter</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Search all UNC courses with advanced filters.
     </div>
   );
 }

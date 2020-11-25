@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from "react";
 import ReactWordcloud from 'react-wordcloud';
 import axios from 'axios';
+const courses = require("./courses.json");
 
 const CourseCloud = () => {
 
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
-  const [courses, setCourses] = React.useState([]);
+  //const [courses, setCourses] = React.useState([]);
   const [courseNames, setCourseNames] = React.useState([]);
 
-  useEffect(() => {
-    getBlogPost();
-  }, []);
+  // useEffect(() => {
+  //   getBlogPost();
+  // }, []);
 
-  const getBlogPost = () => {
-    axios.get('/courses')
-      .then((res) => {
-        const data = res.data;
-        setCourses(data)
-        let names = [];
-        setCourseNames(names);
-        // console.log('Data has been received');
-      })
-      .catch(() => {
-        alert('Error retrieving data!!!');
-      })
-  }
+  // const getBlogPost = () => {
+  //   axios.get('/courses')
+  //     .then((res) => {
+  //       const data = res.data;
+  //       setCourses(data)
+  //       let names = [];
+  //       setCourseNames(names);
+  //       // console.log('Data has been received');
+  //     })
+  //     .catch(() => {
+  //       alert('Error retrieving data!!!');
+  //     })
+  // }
 
   const handleChange = e => {
+
     setSearchTerm(e.target.value);
   };
 
   useEffect(() => {
+    if(searchTerm.trim()==""){setSearchResults([]);return;};
     let results = [];
     for (let i = 0; i < courses.length; i++) {
       if (courses[i].name.toLowerCase().includes(searchTerm.toLowerCase()) && !results.includes(courses[i])) {
@@ -67,7 +70,7 @@ const CourseCloud = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  const displayCloud = () => {
+  const displayCloud = (para) => {
     let results = []
     if (searchResults.length > 100) {
       results = [...searchResults.slice(0, 100)];
@@ -75,7 +78,7 @@ const CourseCloud = () => {
       results = [...searchResults];
     }
     let length = results.length;
-    console.log(length);
+    //console.log(length);
     let names = results.map((r, i) => {
       let v = 0;
       if (i / length == 0) {
@@ -89,7 +92,7 @@ const CourseCloud = () => {
       } else {
         v = 50;
       }
-      console.log("i", i / length);
+      //console.log("i", i / length);
       return { text: r.name, value: v };
     });
     return (

@@ -6,22 +6,13 @@ import Card from "./Card";
 const courses = require("./courses.json");
 
 const Result = (props) => {
-    const [res, setRes] = useState(courses.slice(0,50));
+    const [res, setRes] = useState(courses.slice(0,200));
     const test = (filter) => {
         console.log("Calling from Result.js");
         console.log(filter);
         //localStorage.username = "haha";
     }
 
-    // const filtering = (filter) => {
-    //     let results = [];
-    //     for (let i = 0; i < 50; i++) {
-    //         if (courses[i].name[6] == 9) {
-    //             results.push(courses[i]);
-    //         }
-    //     }
-    //     setRes(results);
-    // }
     const filtering = (filter) => {
         let results = [];
         let dept_y = filter.dept_y;
@@ -40,11 +31,11 @@ const Result = (props) => {
                         if (parseInt(course_num) <= parseInt(num_max) && !results.includes(courses[i])) {   // course number max
 
                             let ge_in = true;
-                            for (let k = 0; k < ge.length; k++) {       //ge
-                                if (!courses[i].ge.includes(ge[k])) {
-                                    ge_in = false;
-                                }
-                            }
+                            // for (let k = 0; k < ge.length; k++) {       //ge
+                            //     if (!courses[i].ge.includes(ge[k])) {
+                            //         ge_in = false;
+                            //     }
+                            // }
                             if (ge_in) {
                                 results.push(courses[i]);
                             }
@@ -61,7 +52,7 @@ const Result = (props) => {
         } else {
             results_final = [...results]
         }
-        setRes(results_final);
+        setRes(results);
         console.log(results_final)
         return results_final;
     }
