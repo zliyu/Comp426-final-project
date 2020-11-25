@@ -67,6 +67,7 @@ const Filter = (props) => {
     }
 
     const strtolist = (str) => {
+        if(str.trim()==""){return []};
         str = str.split(",");
         let res = [];
         str.forEach(element => {
@@ -100,9 +101,10 @@ const Filter = (props) => {
             <hr />
             <div>
                 <h5>Department</h5>
-                    <p>Only include:
+                    Only include:
                     <input type="text" className="form-control form-control-sm" id="dept_include" onChange={deptinclude}
-                    placeholder="Example: COMP, MATH, PHYS" /></p>
+                    placeholder="Example: COMP, MATH, PHYS" />
+                    <small>Search might take a long time if this is field is empty. Will go through all courses.</small><br/>
                     Do not include:
                     <input type="text" className="form-control form-control-sm" id="dept_exclude" onChange={deptexclude}
                     placeholder="Example: ENGL, HIST" />
@@ -115,7 +117,7 @@ const Filter = (props) => {
                 <h5>Gen Ed</h5>
                 <input type="text" className="form-control form-control-sm" id="gened" onChange={gened}
                     placeholder="Example: HS, NA, US" />
-                <small>Type a comma separated list.</small>
+                <small>Type a comma separated list. If empty, defaulted to all Gen Eds.</small>
             </div>
             <hr />
             <div>
